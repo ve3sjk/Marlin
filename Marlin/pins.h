@@ -1,6 +1,12 @@
 #ifndef PINS_H
 #define PINS_H
 
+// CGS MOD: Definition for the probe pin
+// We are using the Z_MIN endstop as a probe
+// Also, we have our Z_MAX endstop to limit the vertical movement of the spindle
+#define Z_PROBE_PIN 27  // using Sanguinololu, pin 36 (D27) , labeled A4
+#define Z_PROBE_HIT_VALUE 0 // Switch this if your probe gives an inverted value
+
 #if MOTHERBOARD != 88
 #define X_MS1_PIN -1
 #define X_MS2_PIN -1
