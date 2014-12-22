@@ -23,7 +23,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(VE3SJK, 1212m4)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -31,7 +31,7 @@
 #define SERIAL_PORT 0
 
 // This determines the communication speed of the printer
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
@@ -82,7 +82,7 @@
 // 999 = Leapfrog
 
 #ifndef MOTHERBOARD
-#define MOTHERBOARD 33
+#define MOTHERBOARD 35
 #endif
 
 // Define this to set a custom name for your generic Mendel,
@@ -102,7 +102,7 @@
 #define POWER_SUPPLY 1
 
 // Define this to have the electronics keep the power supply off on startup. If you don't know what this is leave it.
- #define PS_DEFAULT_OFF
+// #define PS_DEFAULT_OFF
 
 //===========================================================================
 //=============================Thermal Settings  ============================
@@ -142,7 +142,7 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 0
+#define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 0
@@ -159,7 +159,7 @@
 // The minimal temperature defines the temperature below which the heater will not be enabled It is used
 // to check that the wiring to the thermistor is not broken.
 // Otherwise this would lead to the heater being powered on all the time.
-#define HEATER_0_MINTEMP 5
+#define HEATER_0_MINTEMP 0  //Cyclone : Ignore Thermistor
 #define HEATER_1_MINTEMP 5
 #define HEATER_2_MINTEMP 5
 #define BED_MINTEMP 5
@@ -167,10 +167,10 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 400
-#define HEATER_1_MAXTEMP 400
-#define HEATER_2_MAXTEMP 400
-#define BED_MAXTEMP 400
+#define HEATER_0_MAXTEMP 275
+#define HEATER_1_MAXTEMP 275
+#define HEATER_2_MAXTEMP 275
+#define BED_MAXTEMP 150
 
 // If your bed has low resistance e.g. .6 ohm and throws the fuse you can duty cycle it to reduce the
 // average current. The value should be an integer and the heat bed will be turned on for 1 interval of
@@ -309,11 +309,11 @@ your extruder heater takes 2 minutes to hit the target on heating.
 
 #ifndef ENDSTOPPULLUPS
   // fine endstop settings: Individual pullups. will be ignored if ENDSTOPPULLUPS is defined
-   #define ENDSTOPPULLUP_XMAX
-   #define ENDSTOPPULLUP_YMAX
-   #define ENDSTOPPULLUP_ZMAX
-   #define ENDSTOPPULLUP_XMIN
-   #define ENDSTOPPULLUP_YMIN
+//   #define ENDSTOPPULLUP_XMAX
+//   #define ENDSTOPPULLUP_YMAX
+//   #define ENDSTOPPULLUP_ZMAX
+//   #define ENDSTOPPULLUP_XMIN
+//   #define ENDSTOPPULLUP_YMIN
   // #define ENDSTOPPULLUP_ZMIN
 #endif
 
@@ -329,7 +329,7 @@ your extruder heater takes 2 minutes to hit the target on heating.
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
 const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool X_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
@@ -354,9 +354,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define DISABLE_E false // For all extruders
 #define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
 
-#define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
+#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
 #define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
+#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -365,18 +365,18 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
-#define Z_HOME_DIR 1
+#define Z_HOME_DIR -1
 
-#define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
+#define min_software_endstops false // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 205
+#define X_MAX_POS 240
 #define X_MIN_POS 0
 #define Y_MAX_POS 205
 #define Y_MIN_POS 0
 #define Z_MAX_POS 50
-#define Z_MIN_POS -50
+#define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
 #define Y_MAX_LENGTH (Y_MAX_POS - Y_MIN_POS)
